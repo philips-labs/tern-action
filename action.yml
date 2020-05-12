@@ -17,5 +17,5 @@ outputs:
     description: "Path with output json files"
 
 runs:
-  using: node
+  using: node12
   main: 'dist/index.js'

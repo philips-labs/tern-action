@@ -1570,7 +1570,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const core = __importStar(__webpack_require__(470));
 const exec_1 = __webpack_require__(986);
 exports.tern = async () => {
-    const image = core.getInput('image', { required: false });
+    const image = core.getInput('image', { required: true });
     const outputDirectory = core.getInput('output-directory', { required: false });
     const path = outputDirectory;
     core.setOutput("path", path);

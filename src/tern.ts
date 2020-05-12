@@ -2,7 +2,7 @@ import * as core from '@actions/core';
 import { exec } from '@actions/exec';
 
 export const tern = async () => {
-  const image = core.getInput('image', { required: false });
+  const image = core.getInput('image', { required: true });
   const outputDirectory = core.getInput('output-directory', { required: false });
   const path = outputDirectory; 
   
