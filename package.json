@@ -1,0 +1,36 @@
+{
+  "name": "tern-action",
+  "version": "1.0.0",
+  "description": "GitHub Action to VMWARE's tern",
+  "main": "index.js",
+  "author": "Jeroen Knoops",
+  "license": "MIT",
+  "scripts": {
+    "build": "ncc build index.ts -o dist",
+    "test": "jest --no-cahce",
+    "test:watch": "jest --watch --watchAll",
+    "blurk": "echo blurk"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/philips-labs/tern-action.git"
+  },
+  "bugs": {
+    "url": "https://github.com/philips-labs/tern-action/issues"
+  },
+  "homepage": "https://github.com/philips-labs/tern-action#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.4",
+    "@actions/exec": "^1.0.4",
+    "@actions/github": "^2.2.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.13.5",
+    "@zeit/ncc": "^0.22.1",
+    "jest": "^26.0.1",
+    "jest-cli": "^26.0.1",
+    "ts-jest": "^25.5.1",
+    "typescript": "^3.8.3"
+  }
+}

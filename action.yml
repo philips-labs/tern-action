@@ -1,0 +1,21 @@
+name: "tern"
+description: "Runs the VMWARE's tern over docker images"
+author: "Jeroen Knoops <jeroen.knoops@philips.com>"
+branding:
+  icon: "check"
+  color: "green"
+inputs:
+  image:
+    description: "The docker image to scan"
+    required: true
+  output-directory:
+    description: "Output directory"
+    required: false
+
+outputs:
+  path:
+    description: "Path with output json files"
+
+runs:
+  using: node
+  main: 'dist/index.js'
