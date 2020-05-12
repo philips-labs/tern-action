@@ -4,7 +4,8 @@ import { exec } from '@actions/exec';
 export const tern = async () => {
   const image = core.getInput('image', { required: true });
   const outputDirectory = core.getInput('output-directory', { required: false });
-  const path = `${outputDirectory}/${image}.txt` ; 
+  const snakeCaseImage = image.split(':').join('-');
+  const path = `${outputDirectory}/${snakeCaseImage}.txt` ; 
   
   core.setOutput("path", path);
 
@@ -12,6 +13,7 @@ export const tern = async () => {
     `git clone https://github.com/tern-tools/tern.git`,
     `docker build . --file tern/Dockerfile --tag ternd`,
     `./tern/docker_run.sh workdir ternd "report -f json -i ${image}" > ${path}`,
+    `cat ${path}`,
   ];
 
   core.info(`
