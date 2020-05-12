@@ -25,15 +25,12 @@ This Action wraps [`tern`](https://github.com/tern-tools/tern) allowing scanning
 
 **Required** docker image to scan. Example: `alpine:latest` 
 
-### `output-directory`
-
-**Optional** name of the output directory. Default is the Kebab-cased `image` name. Example: `alpine-latest`
 
 ## Outputs
 
-### `path`
+### `output`
 
-Path where to find the output JSON files.
+output JSON file.
 
 ## Environment Variables
 
@@ -48,18 +45,16 @@ name: build
 on: [push]
 
 jobs:
-  build:
+  scan:
     runs-on: ubuntu-latest
     steps:
-      - name: "checkout repo"
-        uses: actions/checkout@v2.0.0
-      - name: Run tern 
-        uses: philips-labs/tern-action@v0.1.0
+      - uses: philips-labs/tern-action@v0.1.0
+        id: scan
         with:
           image: 'alpine:latest'
+      - name: cat output
+        run: echo ${{ steps.scan.outputs.output }}
 ```
-
-### Custom configuration file: 
 
 #### Examples
 
