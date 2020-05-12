@@ -13,6 +13,8 @@ export const tern = async () => {
     `git clone https://github.com/tern-tools/tern.git`,
     `docker build . --file tern/Dockerfile --tag ternd`,
     `./tern/docker_run.sh workdir ternd "report -f json -i ${image}" > ${path}`,
+    `ls -lah`,
+    `ls -lah ..`,
     `cat ${path}`,
   ];
 
