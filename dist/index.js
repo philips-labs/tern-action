@@ -1577,8 +1577,7 @@ exports.tern = async () => {
     const ternCommands = [
         `git clone https://github.com/tern-tools/tern.git`,
         `docker build . --file tern/Dockerfile --tag ternd`,
-        `cd tern`,
-        `./docker_run.sh workdir ternd "report -f json -i ${image}" > ${outputDirectory}/${image}.txt`,
+        `./tern/docker_run.sh workdir ternd "report -f json -i ${image}" > ${outputDirectory}/${image}.txt`,
     ];
     core.info(`
     Using Configuration:
