@@ -1572,12 +1572,12 @@ const exec_1 = __webpack_require__(986);
 exports.tern = async () => {
     const image = core.getInput('image', { required: true });
     const outputDirectory = core.getInput('output-directory', { required: false });
-    const path = outputDirectory;
+    const path = `${outputDirectory}/${image}.txt`;
     core.setOutput("path", path);
     const ternCommands = [
         `git clone https://github.com/tern-tools/tern.git`,
         `docker build . --file tern/Dockerfile --tag ternd`,
-        `./tern/docker_run.sh workdir ternd "report -f json -i ${image}" > ${outputDirectory}/${image}.txt`,
+        `./tern/docker_run.sh workdir ternd "report -f json -i ${image}" > ${path}`,
     ];
     core.info(`
     Using Configuration:
