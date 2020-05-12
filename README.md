@@ -16,7 +16,6 @@ This Action wraps [`tern`](https://github.com/tern-tools/tern) allowing scanning
 - [Environment Variables](#environment-variables)
 - [Example Usage](#example-usage)
     - [Vanilla](#vanilla)
-    - [Custom File](#custom-file)
 - [License](#license)
 
 ## Inputs
