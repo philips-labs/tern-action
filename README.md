@@ -29,6 +29,10 @@ This Action wraps [`tern`](https://github.com/tern-tools/tern) allowing scanning
 
 ### `output`
 
+output JSON string
+
+### `file`
+
 output JSON file.
 
 ## Environment Variables
@@ -47,12 +51,14 @@ jobs:
   scan:
     runs-on: ubuntu-latest
     steps:
-      - uses: philips-labs/tern-action@v0.1.0
+      - uses: philips-labs/tern-action@v0.2.0
         id: scan
         with:
-          image: 'alpine:latest'
-      - name: cat output
-        run: echo ${{ steps.scan.outputs.output }}
+          image: alpine:latest
+      - uses: actions/upload-artifact@v2
+        with:
+          name: tern 
+          path: ${{ steps.scan.outputs.file }} 
 ```
 
 #### Examples
