@@ -1569,6 +1569,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const core = __importStar(__webpack_require__(470));
 const exec_1 = __webpack_require__(986);
+const fs_1 = __webpack_require__(747);
 exports.tern = async () => {
     const image = core.getInput('image', { required: true });
     const prepareCommands = [
@@ -1614,8 +1615,19 @@ exports.tern = async () => {
         }
     }
     core.endGroup();
+    core.startGroup('Save output');
+    await fs_1.writeFile(outputFile, myOutput, (err) => {
+        if (err) {
+            core.setFailed(`Write ${outputFile} failed`);
+            throw new Error(`Write ${outputFile} failed`);
+        }
+        core.info(`Ouput written to ${outputFile}`);
+    });
+    core.endGroup();
+    core.startGroup('collection output');
     core.setOutput('output', myOutput);
     core.setOutput('file', outputFile);
+    core.endGroup();
 };
 
 

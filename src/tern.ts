@@ -1,5 +1,6 @@
 import * as core from '@actions/core';
 import { exec, ExecOptions } from '@actions/exec';
+import { writeFile } from 'fs';
 
 export const tern = async () => {
   const image = core.getInput('image', { required: true });
@@ -57,6 +58,20 @@ export const tern = async () => {
   }
   core.endGroup();
 
+  core.startGroup('Save output');
+  await writeFile(outputFile, myOutput, (err) => {
+    if (err) {
+        core.setFailed(`Write ${outputFile} failed`);
+        throw new Error(`Write ${outputFile} failed`);
+     }
+     core.info(
+       `Ouput written to ${outputFile}`
+     );
+  });
+  core.endGroup();
+
+  core.startGroup('collection output');
   core.setOutput('output', myOutput);
   core.setOutput('file', outputFile);
+  core.endGroup();
 };
