@@ -1582,7 +1582,7 @@ exports.tern = async () => {
         'human'
     ];
     if (!allFormats.includes(outputFormat)) {
-        core.setFailed('Tern scan failed.');
+        core.setFailed('format does not match');
         throw new Error('Tern scan failed');
     }
     if (!outputFile) {
