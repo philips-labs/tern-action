@@ -1579,7 +1579,7 @@ exports.tern = async () => {
     const outputFormat = "json";
     const outputFile = `tern.${outputFormat}`;
     const ternCommands = [
-        `./tern/docker_run.sh workdir ternd "report -f ${outputFormat} -i ${image} -o ${outputFile}"`,
+        `./tern/docker_run.sh workdir ternd "report -f ${outputFormat} -i ${image}"`,
     ];
     core.info(`
     Using Configuration:
