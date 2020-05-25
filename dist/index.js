@@ -1571,20 +1571,36 @@ const core = __importStar(__webpack_require__(470));
 const exec_1 = __webpack_require__(986);
 const fs_1 = __webpack_require__(747);
 exports.tern = async () => {
+    core.startGroup('Check inputs');
     const image = core.getInput('image', { required: true });
-    const prepareCommands = [
-        `git clone https://github.com/tern-tools/tern.git`,
-        `docker build . --file tern/Dockerfile --tag ternd`,
+    const outputFormat = core.getInput('format', { required: true });
+    let outputFile = core.getInput('output', { required: false });
+    const allFormats = [
+        'json',
+        'spdxtagvalue',
+        'yaml',
+        'human'
     ];
-    const ternCommands = [
-        `./tern/docker_run.sh workdir ternd "report -f json -i ${image}"`,
-    ];
+    if (!allFormats.includes(outputFormat)) {
+        core.setFailed('format does not match');
+        throw new Error('Tern scan failed');
+    }
+    if (!outputFile) {
+        outputFile = `tern.${outputFormat}`;
+    }
     core.info(`
     Using Configuration:
 
     image             : ${image}
+    outputFormat      : ${outputFormat}
+    outputFile        : ${outputFile}
   `);
+    core.endGroup();
     core.startGroup('prepare tern environment');
+    const prepareCommands = [
+        `git clone https://github.com/tern-tools/tern.git`,
+        `docker build . --file tern/Dockerfile --tag ternd`,
+    ];
     for (let index in prepareCommands) {
         const errorCode = await exec_1.exec(prepareCommands[index]);
         if (errorCode === 1) {
@@ -1594,6 +1610,10 @@ exports.tern = async () => {
     }
     core.endGroup();
     core.startGroup('Running tern scan');
+    const outputFormatParameter = outputFormat == 'human' ? '' : `-f ${outputFormat}`;
+    const ternCommands = [
+        `./tern/docker_run.sh workdir ternd "report ${outputFormatParameter} -i ${image}"`,
+    ];
     core.debug(`Running tern with the following commands: ${ternCommands.join(', ')}`);
     let myOutput = '';
     const options = {
@@ -1612,17 +1632,17 @@ exports.tern = async () => {
     }
     core.endGroup();
     core.startGroup('Save output');
-    await fs_1.writeFile("tern.json", myOutput, (err) => {
+    await fs_1.writeFile(outputFile, myOutput, (err) => {
         if (err) {
-            core.setFailed('Write tern.json failed');
-            throw new Error('Write ten.json failed');
+            core.setFailed(`Write ${outputFile} failed`);
+            throw new Error(`Write ${outputFile} failed`);
         }
-        core.info(`Ouput written to tern.json`);
+        core.info(`Ouput written to ${outputFile}`);
     });
     core.endGroup();
     core.startGroup('collection output');
     core.setOutput('output', myOutput);
-    core.setOutput('file', "tern.json");
+    core.setOutput('file', outputFile);
     core.endGroup();
 };
 

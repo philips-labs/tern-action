@@ -10,6 +10,13 @@ inputs:
   image:
     description: "The docker image to scan"
     required: true
+  format:
+    description: "Output format"
+    default: 'json'
+    required: false
+  output:
+    description: "Filenam Output"
+    required: false
 
 outputs:
   output:
