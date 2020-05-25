@@ -1571,16 +1571,22 @@ const core = __importStar(__webpack_require__(470));
 const exec_1 = __webpack_require__(986);
 const fs_1 = __webpack_require__(747);
 exports.tern = async () => {
+    core.startGroup('Check inputs');
     const image = core.getInput('image', { required: true });
-    const prepareCommands = [
-        `git clone https://github.com/tern-tools/tern.git`,
-        `docker build . --file tern/Dockerfile --tag ternd`,
+    const outputFormat = core.getInput('format', { required: true });
+    let outputFile = core.getInput('output', { required: false });
+    const allFormats = [
+        'json',
+        'spdx',
+        'human'
     ];
-    const outputFormat = "json";
-    const outputFile = `tern.${outputFormat}`;
-    const ternCommands = [
-        `./tern/docker_run.sh workdir ternd "report -f ${outputFormat} -i ${image}"`,
-    ];
+    if (!allFormats.includes(outputFormat)) {
+        core.setFailed('Tern scan failed.');
+        throw new Error('Tern scan failed');
+    }
+    if (!outputFile) {
+        outputFile = `tern.${outputFormat}`;
+    }
     core.info(`
     Using Configuration:
 
@@ -1588,7 +1594,12 @@ exports.tern = async () => {
     outputFormat      : ${outputFormat}
     outputFile        : ${outputFile}
   `);
+    core.endGroup();
     core.startGroup('prepare tern environment');
+    const prepareCommands = [
+        `git clone https://github.com/tern-tools/tern.git`,
+        `docker build . --file tern/Dockerfile --tag ternd`,
+    ];
     for (let index in prepareCommands) {
         const errorCode = await exec_1.exec(prepareCommands[index]);
         if (errorCode === 1) {
@@ -1598,6 +1609,9 @@ exports.tern = async () => {
     }
     core.endGroup();
     core.startGroup('Running tern scan');
+    const ternCommands = [
+        `./tern/docker_run.sh workdir ternd "report -f ${outputFormat} -i ${image}"`,
+    ];
     core.debug(`Running tern with the following commands: ${ternCommands.join(', ')}`);
     let myOutput = '';
     const options = {

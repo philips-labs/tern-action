@@ -24,6 +24,15 @@ This Action wraps [`tern`](https://github.com/tern-tools/tern) allowing scanning
 
 **Required** docker image to scan. Example: `alpine:latest` 
 
+### `format`
+
+Output format. Can be either: `json`, `spdx` or `human`
+
+**Optional** defaults to `json`
+
+### `output`
+
+**Optional** Name of the output file
 
 ## Outputs
 

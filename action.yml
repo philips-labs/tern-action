@@ -12,7 +12,7 @@ inputs:
     required: true
   format:
     description: "Output format"
-    default: "json"
+    default: 'json'
     required: false
   output:
     description: "Filenam Output"
