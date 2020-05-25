@@ -1569,20 +1569,23 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const core = __importStar(__webpack_require__(470));
 const exec_1 = __webpack_require__(986);
-const fs_1 = __webpack_require__(747);
 exports.tern = async () => {
     const image = core.getInput('image', { required: true });
     const prepareCommands = [
         `git clone https://github.com/tern-tools/tern.git`,
         `docker build . --file tern/Dockerfile --tag ternd`,
     ];
+    const outputFormat = "json";
+    const outputFile = `tern.${outputFormat}`;
     const ternCommands = [
-        `./tern/docker_run.sh workdir ternd "report -f json -i ${image}"`,
+        `./tern/docker_run.sh workdir ternd "report -f ${outputFormat} -i ${image} -o ${outputFile}"`,
     ];
     core.info(`
     Using Configuration:
 
     image             : ${image}
+    outputFormat      : ${outputFormat}
+    outputFile        : ${outputFile}
   `);
     core.startGroup('prepare tern environment');
     for (let index in prepareCommands) {
@@ -1611,19 +1614,8 @@ exports.tern = async () => {
         }
     }
     core.endGroup();
-    core.startGroup('Save output');
-    await fs_1.writeFile("tern.json", myOutput, (err) => {
-        if (err) {
-            core.setFailed('Write tern.json failed');
-            throw new Error('Write ten.json failed');
-        }
-        core.info(`Ouput written to tern.json`);
-    });
-    core.endGroup();
-    core.startGroup('collection output');
     core.setOutput('output', myOutput);
-    core.setOutput('file', "tern.json");
-    core.endGroup();
+    core.setOutput('file', outputFile);
 };
 
 
