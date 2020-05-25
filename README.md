@@ -32,7 +32,7 @@ Output format. Can be either: `json`, `spdxtagvalue`, `yaml` or `human`
 
 ### `output`
 
-**Optional** Name of the output file
+**Optional** Name of the output file. Defaults to `tern.<format>`
 
 ## Outputs
 
@@ -64,6 +64,8 @@ jobs:
         id: scan
         with:
           image: alpine:latest
+          format: yaml
+          output: alpine.yaml
       - uses: actions/upload-artifact@v2
         with:
           name: tern 
