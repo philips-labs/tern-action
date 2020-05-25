@@ -12,7 +12,8 @@ export const tern = async () => {
   
   const allFormats: string[] = [
     'json',
-    'spdx',
+    'spdxtagvalue',
+    'yaml',
     'human'
   ]
 
@@ -51,9 +52,11 @@ export const tern = async () => {
   core.endGroup();
 
   core.startGroup('Running tern scan');
-  
+
+  const outputFormatParameter: string = outputFormat == 'human' ? '' : `-f ${outputFormat}` 
+
   const ternCommands: string[] = [
-    `./tern/docker_run.sh workdir ternd "report -f ${outputFormat} -i ${image}"`,
+    `./tern/docker_run.sh workdir ternd "report ${outputFormatParameter} -i ${image}"`,
   ];
 
   core.debug(

@@ -1577,7 +1577,8 @@ exports.tern = async () => {
     let outputFile = core.getInput('output', { required: false });
     const allFormats = [
         'json',
-        'spdx',
+        'spdxtagvalue',
+        'yaml',
         'human'
     ];
     if (!allFormats.includes(outputFormat)) {
@@ -1609,8 +1610,9 @@ exports.tern = async () => {
     }
     core.endGroup();
     core.startGroup('Running tern scan');
+    const outputFormatParameter = outputFormat == 'human' ? '' : `-f ${outputFormat}`;
     const ternCommands = [
-        `./tern/docker_run.sh workdir ternd "report -f ${outputFormat} -i ${image}"`,
+        `./tern/docker_run.sh workdir ternd "report ${outputFormatParameter} -i ${image}"`,
     ];
     core.debug(`Running tern with the following commands: ${ternCommands.join(', ')}`);
     let myOutput = '';
