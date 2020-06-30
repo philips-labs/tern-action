@@ -1577,6 +1577,7 @@ exports.tern = async () => {
     let outputFile = core.getInput('output', { required: false });
     const allFormats = [
         'json',
+        'html',
         'spdxtagvalue',
         'yaml',
         'human'

@@ -12,6 +12,7 @@ export const tern = async () => {
   
   const allFormats: string[] = [
     'json',
+    'html',
     'spdxtagvalue',
     'yaml',
     'human'
