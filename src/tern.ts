@@ -56,7 +56,7 @@ export const tern = async () => {
   const outputFormatParameter: string = outputFormat == 'human' ? '' : `-f ${outputFormat}` 
 
   const ternCommands: string[] = [
-    `./tern/docker_run.sh ternd "report ${outputFormatParameter} -i ${image}"`,
+    `./tern/docker_run.sh ternd \"report ${outputFormatParameter} -i ${image}\"`,
   ];
 
   core.debug(
