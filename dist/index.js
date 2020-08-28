@@ -1612,7 +1612,7 @@ exports.tern = async () => {
     core.startGroup('Running tern scan');
     const outputFormatParameter = outputFormat == 'human' ? '' : `-f ${outputFormat}`;
     const ternCommands = [
-        `./tern/docker_run.sh workdir ternd "report ${outputFormatParameter} -i ${image}"`,
+        `./tern/docker_run.sh ternd \"report ${outputFormatParameter} -i ${image}\"`,
     ];
     core.debug(`Running tern with the following commands: ${ternCommands.join(', ')}`);
     let myOutput = '';
