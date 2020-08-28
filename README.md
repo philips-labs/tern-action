@@ -26,7 +26,7 @@ This Action wraps [`tern`](https://github.com/tern-tools/tern) allowing scanning
 
 ### `format`
 
-Output format. Can be either: `json`, `spdxtagvalue`, `yaml` or `human`
+Output format. Can be either: `json`, `html`, `spdxtagvalue`, `yaml` or `human`
 
 **Optional** defaults to `json`
 
