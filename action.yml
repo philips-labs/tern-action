@@ -1,4 +1,4 @@
-name: "tern"
+name: "tern-action"
 description: "Runs the VMWARE's tern over docker images"
 author: "Jeroen Knoops <jeroen.knoops@philips.com>"
 

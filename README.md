@@ -5,9 +5,6 @@
 [![Marketplace](https://img.shields.io/badge/GitHub-Marketplace-green.svg)](https://github.com/marketplace/actions/tern) [![Release](https://img.shields.io/github/release/philips-labs/tern-action.svg)](https://github.com/philips-labs/tern-action/releases) ![.github/workflows/lint.yml](https://github.com/philips-labs/tern-action/workflows/.github/workflows/lint.yml/badge.svg)
 
 This Action wraps [`tern`](https://github.com/tern-tools/tern) allowing scanning of your docker images!
-
-> :warning: **Not finished yet**: Work in Progress. This action will be based on [this github action workflow](https://github.com/JeroenKnoops/scan-docker-image/blob/master/.github/workflows/scan-tern.yml)
-
 </div>
 
 ## Contents
@@ -60,7 +57,7 @@ jobs:
   scan:
     runs-on: ubuntu-latest
     steps:
-      - uses: philips-labs/tern-action@v0.2.0
+      - uses: philips-labs/tern-action@v1.0.0
         id: scan
         with:
           image: alpine:latest
