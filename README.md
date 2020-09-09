@@ -57,7 +57,7 @@ jobs:
   scan:
     runs-on: ubuntu-latest
     steps:
-      - uses: philips-labs/tern-action@v1.0.0
+      - uses: philips-labs/tern-action@v1.1.0
         id: scan
         with:
           image: alpine:latest
