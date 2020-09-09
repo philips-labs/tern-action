@@ -1,0 +1,35 @@
+name: Update dist
+
+on:
+  pull_request:
+  push:
+    branches:
+      - "master"
+      - "auto-update-dist"
+
+jobs:
+  update-dist:
+    name: Update dist in the repository
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+      - name: yarn install
+        run: |
+          yarn 
+      - name: yarn build
+        run: |
+          yarn build
+      - name: Update dist in the repository
+        uses: stefanzweifel/git-auto-commit-action@v4.4.1
+        with:
+          commit_user_name: GitHub Actions
+          commit_user_email: my-github-actions-bot@example.org
+          commit_message: 'Updating dist in the repository'
