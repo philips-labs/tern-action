@@ -1597,23 +1597,10 @@ exports.tern = async () => {
     outputFile        : ${outputFile}
   `);
     core.endGroup();
-    core.startGroup('prepare tern environment');
-    const prepareCommands = [
-        `git clone https://github.com/tern-tools/tern.git`,
-        `docker build . --file tern/Dockerfile --tag ternd`,
-    ];
-    for (let index in prepareCommands) {
-        const errorCode = await exec_1.exec(prepareCommands[index]);
-        if (errorCode === 1) {
-            core.setFailed('Tern scan failed.');
-            throw new Error('Tern scan failed');
-        }
-    }
-    core.endGroup();
     core.startGroup('Running tern scan');
     const outputFormatParameter = outputFormat == 'human' ? '' : `-f ${outputFormat}`;
     const ternCommands = [
-        `./tern/docker_run.sh ternd \"report ${outputFormatParameter} -i ${image}\"`,
+        `docker run --privileged --device /dev/fuse -v /var/run/docker.sock:/var/run/docker.sock --rm philipssoftware/ternd:2.2.0 \"report ${outputFormatParameter} -i ${image}\"`,
     ];
     core.debug(`Running tern with the following commands: ${ternCommands.join(', ')}`);
     let myOutput = '';
