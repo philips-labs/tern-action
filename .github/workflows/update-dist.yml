@@ -3,9 +3,6 @@ name: Update dist
 on:
   pull_request:
   push:
-    branches:
-      - "master"
-      - "auto-update-dist"
 
 jobs:
   update-dist:
