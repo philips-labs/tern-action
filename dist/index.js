@@ -1628,7 +1628,7 @@ exports.tern = async () => {
         const errorCode = await exec_1.exec(ternCommands[index], [], options);
         if (errorCode === 1) {
             core.setFailed('Tern scan failed.');
-            throw new Error('Tern scan failed');
+            throw new Error('Tern scan failed.');
         }
     }
     core.endGroup();
