@@ -9,7 +9,10 @@ export const tern = async () => {
 
   const outputFormat = core.getInput('format', { required: true });
   let outputFile = core.getInput('output', { required: false });
-  
+  const scancode = core.getInput('scancode', { required: false });
+ 
+  let ternVersion = "2";
+
   const allFormats: string[] = [
     'json',
     'html',
@@ -38,10 +41,17 @@ export const tern = async () => {
 
   core.startGroup('Running tern scan');
 
-  const outputFormatParameter: string = outputFormat == 'human' ? '' : `-f ${outputFormat}` 
+  const outputFormatParameter: string = outputFormat == 'human' ? '' : `-f ${outputFormat}`
+
+  let scancodeFragment = '';
+
+  if (!scancode) {
+    ternVersion = '2-scancode';
+    scancodeFragment = '-x scancode';
+  } 
 
   const ternCommands: string[] = [
-    `docker run --privileged --device /dev/fuse -v /var/run/docker.sock:/var/run/docker.sock --rm philipssoftware/tern:2.2.0 report ${outputFormatParameter} -i ${image}`,
+    `docker run --privileged --device /dev/fuse -v /var/run/docker.sock:/var/run/docker.sock --rm philipssoftware/tern:${ternVersion} report ${scancodeFragment} ${outputFormatParameter} -i ${image}`,
   ];
 
   core.debug(

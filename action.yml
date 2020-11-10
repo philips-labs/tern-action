@@ -15,7 +15,10 @@ inputs:
     default: 'json'
     required: false
   output:
-    description: "Filenam Output"
+    description: "Filename Output"
+    required: false
+  scancode:
+    description: "Use scancode extention"
     required: false
 
 outputs:
