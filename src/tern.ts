@@ -9,7 +9,7 @@ export const tern = async () => {
 
   const outputFormat = core.getInput('format', { required: true });
   let outputFile = core.getInput('output', { required: false });
-  const scancode = core.getInput('scancode', { required: false });
+  let scancode = core.getInput('scancode', { required: false });
  
   let ternVersion = "2";
 
@@ -30,12 +30,17 @@ export const tern = async () => {
     outputFile = `tern.${outputFormat}`;
   }
 
+  if (!scancode) {
+    scancode = 'false';
+  }
+
   core.info(`
     Using Configuration:
 
     image             : ${image}
     outputFormat      : ${outputFormat}
     outputFile        : ${outputFile}
+    scancode          : ${scancode}
   `);
   core.endGroup();
 
@@ -45,7 +50,7 @@ export const tern = async () => {
 
   let scancodeFragment = '';
 
-  if (!scancode) {
+  if (scancode == 'true') {
     ternVersion = '2-scancode';
     scancodeFragment = '-x scancode';
   } 
