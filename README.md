@@ -31,6 +31,10 @@ Output format. Can be either: `json`, `html`, `spdxtagvalue`, `yaml` or `human`
 
 **Optional** Name of the output file. Defaults to `tern.<format>`
 
+### `scancode`
+
+**Optional** When set to true, the scan will also use scancode. Defaults to `false`.
+
 ## Outputs
 
 ### `output`
