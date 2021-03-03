@@ -14,6 +14,7 @@ export const tern = async () => {
     'json',
     'html',
     'spdxtagvalue',
+    'spdxjson',
     'yaml',
     'human'
   ]
