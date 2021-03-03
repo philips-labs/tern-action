@@ -1665,7 +1665,7 @@ exports.tern = async () => {
     core.startGroup('Running tern scan');
     const outputFormatParameter = outputFormat == 'human' ? '' : `-f ${outputFormat}`;
     const ternCommands = [
-        `docker run --privileged --device /dev/fuse -v /var/run/docker.sock:/var/run/docker.sock --rm philipssoftware/tern:2.2.0 report ${outputFormatParameter} -i ${image}`,
+        `docker run --privileged --device /dev/fuse -v /var/run/docker.sock:/var/run/docker.sock --rm philipssoftware/tern:2.4.0 report ${outputFormatParameter} -i ${image}`,
     ];
     core.debug(`Running tern with the following commands: ${ternCommands.join(', ')}`);
     let myOutput = '';
