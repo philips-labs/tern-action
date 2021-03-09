@@ -42,7 +42,7 @@ export const tern = async () => {
   const outputFormatParameter: string = outputFormat == 'human' ? '' : `-f ${outputFormat}` 
 
   const ternCommands: string[] = [
-    `docker run --privileged --device /dev/fuse -v /var/run/docker.sock:/var/run/docker.sock --rm philipssoftware/tern:latest report ${outputFormatParameter} -i ${image}`,
+    `docker run --privileged --device /dev/fuse -v /var/run/docker.sock:/var/run/docker.sock --rm philipssoftware/tern:local report ${outputFormatParameter} -i ${image}`,
   ];
 
   core.debug(
