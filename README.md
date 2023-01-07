@@ -1,5 +1,7 @@
 <div align="center">
 
+:warning: This GitHub Action is no longer maintained. Use at own risk.
+
 # GitHub Action to VMWARE's tern!
 
 [![Marketplace](https://img.shields.io/badge/GitHub-Marketplace-green.svg)](https://github.com/marketplace/actions/tern) [![Release](https://img.shields.io/github/release/philips-labs/tern-action.svg)](https://github.com/philips-labs/tern-action/releases) ![.github/workflows/lint.yml](https://github.com/philips-labs/tern-action/workflows/.github/workflows/lint.yml/badge.svg)
